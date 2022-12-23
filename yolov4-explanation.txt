@@ -1,0 +1,38 @@
+*create a dataset folder and add dataset to particalar folder
+will be have two folder inside dataset folder that is train and test
+inside train folder there will train images and txt folder in the same way in test folder
+*if we convert xml file to txt file we will get two file name test and train and there will location inside that folder if we dont have that two file we have to create manually
+*connect google drive to colab
+* change the directory to main directory
+* clone the darknet folder using !git clone https://github.com/AlexeyAB/darknet
+*inside darrnet folder go to 
+*cfg folder and delete all the file expect yolov4-custom.cfg file
+*inside the cfg file make change and save it
+batch=64
+subdivision=16 (if we get error we should use 64)this is mini batches
+width=416
+height=416(if we use higher size we get more accuracy ex:608)
+channels=3(if it is rgb)
+max_batches=8000(if we are using one or two or three then max_batches=600 and if it is more than 3 then do calculation(number of label class*2000 ex:5*2000=10000))
+steps=9000,8000(90% of 8000 and 80% of 8000)
+search for yolo
+filter=(label_classes+5)*3
+classes=5
+*now inside the darknet folder there is data folder create a file named data.data and data.names and in data.data file add 
+Classes= 5
+train = data/train.txt
+valid = data/test.txt
+names = data/data.names
+backup = backup/
+*and in data.names file add all the class names
+*and in data folder the add the two genrated test.txt and train.txt file
+*now change the directory to darknet file
+*make file using code 
+!sed -i 's/OPENCV=0/OPENCV=1/' Makefile
+!sed -i 's/GPU=0/GPU=1/' Makefile
+!sed -i 's/CUDNN=0/CUDNN=1/' Makefile
+!sed -i 's/CUDNN_HALF=0/CUDNN_HALF=1/' Makefile
+!sed -i 's/LIBSO=0/LIBSO=1/' Makefile
+*downloaad yolov4
+*chmod to darknet file 
+now train test using particular file
